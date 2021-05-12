@@ -1,0 +1,31 @@
+﻿Machine Learning - Projeto para Curso do TCU (10/2020) - por Fábio Gomes
+Desafio do negócio - Anualmente são apresentadas na Câmara dos Deputados milhares de proposições legislativas. A adoção de classificação temática realizada de modo automático facilitaria atividades de monitoramento da tramitação de projetos de lei (PL) e outros tipos, como propostas de fiscalização e controle (PFC), segundo grupos temáticos de saúde, ampliando a transparência para a sociedade e agilizando atividades de elaboração legislativa e de fiscalização. Grupo de pesquisa da Câmara dos Deputados sobre Legislativo e Saúde, de que participo, desenvolveu tipologia hierarquizada para classificação de proposições legislativas relacionadas à saúde, contendo quatro grupos temáticos (também possui subcategorias) e pretende-se utilizar essa base para produzir modelo capaz de classificar novas proposições automaticamente.
+Solução construída - Desenvolvo esse projeto de ML há mais de um ano (classificação supervisionada de textos de projetos de lei – PL - relacionados à saúde). Houve muitos problemas na conversão de pdf em texto, pois a Câmara usou vários tipos de pdf ao longo do tempo. Em agosto de 2019, foram elaborados alguns modelos por meio do R (base com 7575 PL). O Random Forest foi o modelo mais promissor. Essa experiência permitiu a detecção de erros de classificação no conjunto de treinamento e algumas intuições sobre o banco de dados e até sobre problemas na própria tipologia usada para a classificação. Esse curso permitiu o aprendizado do Python e a retomada do projeto.
+O projeto atual, desenvolvido no Curso de Machine Learning em Projetos (turma TCU - 2020 - Prof. Erick Muzart) trata-se de classificação supervisionada de textos de PL de 2011 a 2014 relacionados à saúde e seus grupos temáticos.
+As etapas desse projeto incluíram:
+Etapa 1 (em 2019): classificar 8.327 PL de 2011 a 2014 (codificadores humanos) relacionados à saúde: “sim” (2.328 projetos), “não” (5.999 projetos).
+Etapa 2 (em 2019): converter o conteúdo dos arquivos em “pdf” para “txt” (7.575).
+Etapa 3 (em 2019): construir o banco de dados (id dos PL, textos dos PL e códigos de saúde).
+Etapa 4: aplicar modelos de aprendizado de máquina supervisionado (a partir de códigos Python do instrutor Fernando Melo).
+Os modelos dividem o conjunto de dados para treinamento (80%) e teste (20%) e geram previsões para o último.
+Etapa 5: calcular acurácia, recall, precisão e f1 score dos modelos.
+Distribuição das variáveis:
+Variável independente: média por PL -> 844 palavras (std 1.963), corpus dos PL -> 33.700 tokens;
+Variável dependente - dados desbalanceados (maioria não-saúde: 72%);
+Frequência relativa dos grupos temáticos de saúde: Assistência- 3,8%; Gestão e recursos- 4,0%; Prevenção- 15%; Direitos- 6,7%; Outros - 0.
+Foram realizados 26 experimentos por meio de cadernos no Google Colab (ver tabela síntese de resultados).
+
+Resultados:
+NLP melhorou desempenho obtido no Projeto R (RF).
+A acurácia foi maior (89,7% -> 91% - SGD, SVM e RF) e foram captados mais casos de saúde (antes foram 296 -> 326) - f1 score 0,82 nos 3 modelos.
+Stemmer em geral melhorou o desempenho dos modelos.
+Classificação de grupos temáticos obteve desempenho inferior ao do conjunto da saúde (alta acurácia, mas baixo recall), mas a dimensão saúde era captada.
+Detectados erros a serem corrigidos.
+Fonte de dados - O inteiro teor do texto das proposições legislativas pode ser extraído de arquivos pdf, disponibilizados na Internet no site de dados abertos da Câmara dos Deputados. Ref: https://dadosabertos.camara.leg.br/swagger/api.html#staticfile. A listagem das proposições e de seus códigos de classificação, identificados por humanos estão disponíveis em planilhas eletrônicas neste site.
+
+Estão disponibilizados neste site:
+Estudo sobre agenda da saúde em tramitação na Câmara dos Deputados, para exemplificar aplicação desse tipo de informação;
+Manual com a descrição das categorias de saúde;
+Caderno do Google Colab com aplicação de modelo Random Forest;
+Bancos de dados (csv) - um contendo características e a classificação dos PL e outro com os textos dos PL.
+Tabela síntese com resultados de experimentos.
